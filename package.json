@@ -1,13 +1,13 @@
 {
   "name": "zeplin-html-to-pdf",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "AWS Lambda function that converts HTML pages to PDF documents",
   "scripts": {
     "test": "node local/index.js",
     "lint": "./node_modules/.bin/eslint --quiet .",
     "pack": "rm -f package.zip && zip package.zip -r index.js wkhtmltopdf utils",
-    "deploy-dev": "npm run pack && aws lambda update-function-code --region us-west-1 --function-name htmlToPdf --zip-file fileb://`pwd`/package.zip",
-    "deploy-prod": "npm run pack && aws lambda update-function-code --region us-west-2 --function-name htmlToPdf --zip-file fileb://`pwd`/package.zip"
+    "deploy-new": "npm run pack && aws lambda create-function --runtime nodejs6.10 --region ap-southeast-2 --role arn:aws:iam::069011774532:role/service-role/basic --function-name html2Pdf --handler index.handler --zip-file fileb://package.zip",
+    "deploy-update": "npm run pack && aws lambda update-function-code --region ap-southeast-2 --function-name html2Pdf --zip-file fileb://package.zip"
   },
   "repository": {
     "type": "git",
